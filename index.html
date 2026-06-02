@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistente Cita Previa - Consigue tu cita de extranjería automáticamente</title>
+    
+    <!-- SEO -->
+    <meta name="description" content="Consigue tu cita previa de extranjería automáticamente. La app que busca y reserva tu cita 24/7 con notificaciones por WhatsApp y email.">
+    <meta name="keywords" content="cita previa extranjería, cita extranjería automática, huellas extranjería, NIE cita, automatizar cita extranjería">
+    <meta name="author" content="Asistente Cita Previa">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Asistente Cita Previa - Consigue tu cita automáticamente">
+    <meta property="og:description" content="La app que busca, reserva y confirma tu cita previa de extranjería 24/7.">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%233b82f6'/%3E%3Cstop offset='100%25' style='stop-color:%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g)' rx='22' width='100' height='100'/%3E%3Ctext fill='white' font-size='55' font-weight='bold' text-anchor='middle' x='50' y='70'%3E🤖%3C/text%3E%3C/svg%3E">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%233b82f6'/%3E%3Cstop offset='100%25' style='stop-color:%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g)' rx='22' width='100' height='100'/%3E%3Ctext fill='white' font-size='55' font-weight='bold' text-anchor='middle' x='50' y='70'%3E🤖%3C/text%3E%3C/svg%3E">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#3b82f6">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; overflow-x: hidden; }
+
+        /* ========== GRADIENTES ========== */
+        .gradient-text { background: linear-gradient(135deg, #3b82f6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .bg-gradient { background: linear-gradient(135deg, #eff6ff, #ecfeff); }
+        .bg-gradient-dark { background: linear-gradient(135deg, #1e40af, #0e7490); }
+
+        /* ========== NAV ========== */
+        nav { position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #e2e8f0; padding: 16px 0; transition: all 0.3s; }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-size: 24px; font-weight: 800; text-decoration: none; }
+        .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; }
+        .nav-links a { color: #64748b; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: #3b82f6; }
+        .btn-nav { background: linear-gradient(135deg, #3b82f6, #06b6d4); color: #fff !important; padding: 12px 28px; border-radius: 50px; font-weight: 600 !important; box-shadow: 0 4px 15px rgba(59,130,246,0.3); transition: all 0.3s; }
+        .btn-nav:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(59,130,246,0.4); }
+        .menu-toggle { display: none; font-size: 24px; cursor: pointer; }
+
+        /* ========== HERO ========== */
+        .hero { padding: 160px 24px 120px; position: relative; overflow: hidden; background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%); }
+        .hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%); border-radius: 50%; }
+        .hero::after { content: ''; position: absolute; bottom: -100px; left: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%); border-radius: 50%; }
+        .hero-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+        
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1px solid #e2e8f0; padding: 8px 16px; border-radius: 50px; font-size: 13px; color: #64748b; margin-bottom: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .hero-badge span { background: linear-gradient(135deg, #3b82f6, #06b6d4); color: #fff; padding: 4px 10px; border-radius: 50px; font-size: 11px; font-weight: 600; }
+        .hero h1 { font-size: 56px; font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
+        .hero p { font-size: 18px; color: #64748b; margin-bottom: 36px; line-height: 1.7; }
+        
+        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+        .btn-hero { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #3b82f6, #06b6d4); color: #fff; padding: 16px 36px; border-radius: 50px; font-size: 17px; font-weight: 700; text-decoration: none; box-shadow: 0 8px 30px rgba(59,130,246,0.3); transition: all 0.3s; }
+        .btn-hero:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(59,130,246,0.4); }
+        .btn-hero-outline { background: #fff; color: #3b82f6; border: 2px solid #3b82f6; box-shadow: none; }
+        .btn-hero-outline:hover { background: #eff6ff; }
+        
+        .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+        .phone-mockup { width: 280px; height: 560px; background: #1e293b; border-radius: 40px; border: 4px solid #334155; box-shadow: 0 30px 80px rgba(0,0,0,0.2); position: relative; animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        .phone-mockup::before { content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 80px; height: 24px; background: #0f172a; border-radius: 50px; }
+        .phone-screen { position: absolute; top: 50px; left: 8px; right: 8px; bottom: 8px; background: linear-gradient(180deg, #1e293b, #0f172a); border-radius: 24px; display: flex; align-items: center; justify-content: center; font-size: 60px; }
+        
+        .robot-mascot { position: absolute; bottom: -20px; right: -40px; width: 120px; height: 120px; background: linear-gradient(135deg, #3b82f6, #06b6d4); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; display: flex; align-items: center; justify-content: center; font-size: 50px; box-shadow: 0 15px 40px rgba(59,130,246,0.3); animation: morph 8s ease-in-out infinite; }
+        @keyframes morph { 0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; } 50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; } }
+        
+        .floating-badge { position: absolute; top: 20px; right: 20px; background: #fff; padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; box-shadow: 0 8px 25px rgba(0,0,0,0.1); animation: float 4s ease-in-out infinite; }
+        .floating-badge-2 { top: auto; bottom: 40px; left: -20px; right: auto; animation-delay: 1s; }
+
+        /* ========== FEATURES ========== */
+        .features { padding: 100px 24px; background: #fff; }
+        .features-container { max-width: 1200px; margin: 0 auto; }
+        .section-label { text-align: center; font-size: 13px; font-weight: 700; color: #3b82f6; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+        .section-title { text-align: center; font-size: 40px; font-weight: 900; margin-bottom: 16px; }
+        .section-subtitle { text-align: center; font-size: 17px; color: #64748b; margin-bottom: 64px; }
+        
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .feature-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 20px; padding: 32px; transition: all 0.3s; }
+        .feature-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); border-color: #3b82f6; }
+        .feature-icon { width: 56px; height: 56px; background: linear-gradient(135deg, #eff6ff, #ecfeff); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 20px; }
+        .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        .feature-card p { font-size: 14px; color: #64748b; line-height: 1.6; }
+
+        /* ========== STEPS ========== */
+        .steps { padding: 100px 24px; background: linear-gradient(180deg, #f8fafc, #eff6ff); }
+        .steps-container { max-width: 1000px; margin: 0 auto; }
+        .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 60px; }
+        .step-card { text-align: center; position: relative; }
+        .step-card::after { content: ''; position: absolute; top: 24px; right: -30px; width: 60px; height: 2px; background: #e2e8f0; }
+        .step-card:last-child::after { display: none; }
+        .step-number { width: 48px; height: 48px; background: linear-gradient(135deg, #3b82f6, #06b6d4); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 18px; margin: 0 auto 16px; box-shadow: 0 8px 25px rgba(59,130,246,0.3); }
+        .step-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+        .step-card p { font-size: 13px; color: #64748b; }
+
+        /* ========== VIDEO ========== */
+        .video-section { padding: 100px 24px; background: #fff; }
+        .video-container { max-width: 800px; margin: 60px auto 0; position: relative; padding-bottom: 56.25%; height: 0; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.1); }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        /* ========== TESTIMONIALS ========== */
+        .testimonials { padding: 100px 24px; background: #f8fafc; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 60px auto 0; }
+        .testimonial-card { background: #fff; border-radius: 20px; padding: 28px; border: 1px solid #e2e8f0; transition: all 0.3s; }
+        .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
+        .testimonial-stars { color: #f59e0b; font-size: 18px; margin-bottom: 12px; }
+        .testimonial-card p { font-size: 14px; color: #475569; line-height: 1.7; margin-bottom: 16px; font-style: italic; }
+        .testimonial-author { display: flex; align-items: center; gap: 10px; }
+        .author-avatar { width: 40px; height: 40px; background: linear-gradient(135deg, #3b82f6, #06b6d4); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 16px; }
+        .author-info h4 { font-size: 14px; font-weight: 600; }
+        .author-info span { font-size: 12px; color: #94a3b8; }
+
+        /* ========== DOWNLOAD ========== */
+        .download { padding: 100px 24px; background: linear-gradient(135deg, #1e40af, #0e7490); text-align: center; color: #fff; position: relative; overflow: hidden; }
+        .download::before { content: ''; position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); border-radius: 50%; }
+        .download::after { content: ''; position: absolute; bottom: -50px; left: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%); border-radius: 50%; }
+        .download .container { position: relative; z-index: 1; }
+        .download h2 { font-size: 40px; font-weight: 900; margin-bottom: 16px; }
+        .download p { font-size: 18px; opacity: 0.9; margin-bottom: 40px; }
+        .download-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+        .btn-dl { display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #1e293b; padding: 16px 32px; border-radius: 50px; font-size: 16px; font-weight: 700; text-decoration: none; transition: all 0.3s; }
+        .btn-dl:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .btn-dl-outline { background: transparent; border: 2px solid rgba(255,255,255,0.3); color: #fff; }
+        .btn-dl-outline:hover { background: rgba(255,255,255,0.1); }
+
+        /* ========== FAQ ========== */
+        .faq { padding: 100px 24px; background: #fff; }
+        .faq-container { max-width: 700px; margin: 60px auto 0; }
+        .faq-item { border-bottom: 1px solid #e2e8f0; }
+        .faq-question { padding: 20px 0; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 16px; transition: color 0.3s; }
+        .faq-question:hover { color: #3b82f6; }
+        .faq-answer { padding: 0 0 20px; font-size: 14px; color: #64748b; display: none; line-height: 1.7; }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-question { color: #3b82f6; }
+
+        /* ========== FOOTER ========== */
+        footer { padding: 40px 24px; text-align: center; background: #f8fafc; color: #94a3b8; font-size: 14px; border-top: 1px solid #e2e8f0; }
+        footer a { color: #3b82f6; text-decoration: none; }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
+            .hero h1 { font-size: 36px; }
+            .hero-buttons { justify-content: center; }
+            .hero-visual { margin-top: 40px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .steps-grid { grid-template-columns: 1fr 1fr; }
+            .step-card::after { display: none; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .menu-toggle { display: block; }
+            .nav-links.active { display: flex; flex-direction: column; position: absolute; top: 70px; left: 0; right: 0; background: #fff; padding: 20px; border-bottom: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+            .phone-mockup { width: 220px; height: 440px; }
+            .robot-mascot { width: 90px; height: 90px; font-size: 35px; right: -10px; bottom: -10px; }
+            .floating-badge { font-size: 11px; padding: 6px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- NAVBAR -->
+    <!-- ========================================== -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo"><span class="gradient-text">CitaPrevia</span> 🤖</a>
+            <span class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">☰</span>
+            <ul class="nav-links">
+                <li><a href="#features">Funcionalidades</a></li>
+                <li><a href="#how">Cómo funciona</a></li>
+                <li><a href="#video">Demo</a></li>
+                <li><a href="#testimonials">Testimonios</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#download" class="btn-nav">Descargar</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ========================================== -->
+    <!-- HERO -->
+    <!-- ========================================== -->
+    <section class="hero">
+        <div class="hero-container">
+            <div>
+                <div class="hero-badge"><span>PRO</span> Automatización 24/7</div>
+                <h1>Consigue tu <span class="gradient-text">Cita de Extranjería</span> Automáticamente</h1>
+                <p>La app que busca, reserva y confirma tu cita previa mientras duermes. Notificaciones por WhatsApp y email al instante. 🚀</p>
+                <div class="hero-buttons">
+                    <a href="#download" class="btn-hero">📥 Descargar Gratis →</a>
+                    <a href="#video" class="btn-hero btn-hero-outline">▶ Ver Demo</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="phone-mockup">
+                    <div class="phone-screen">🎫</div>
+                </div>
+                <div class="robot-mascot">🤖</div>
+                <div class="floating-badge">⚡ Citas en 24h</div>
+                <div class="floating-badge floating-badge-2">✅ 100% Automático</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FEATURES -->
+    <!-- ========================================== -->
+    <section class="features" id="features">
+        <div class="features-container">
+            <div class="section-label">FUNCIONALIDADES</div>
+            <h2 class="section-title">Todo lo que necesitas</h2>
+            <p class="section-subtitle">Automatiza tu búsqueda de cita con herramientas profesionales</p>
+            <div class="features-grid">
+                <div class="feature-card">
+    <div class="feature-icon">🔀</div>
+    <h3>Modo Automático o Manual</h3>
+    <p>Activa el automático cuando quieras descansar, o cambia a manual para revisar cada cita antes de aceptarla.</p>
+</div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Notificaciones Multi-canal</h3>
+                    <p>WhatsApp, email y alerta sonora cuando tu cita esté lista. No te perderás tu oportunidad.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Horarios Personalizables</h3>
+                    <p>Configura los días y horas exactos en los que quieres que la app busque citas automáticamente.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3>+50 Oficinas Disponibles</h3>
+                    <p>Todas las comisarías de España: Madrid, Barcelona, Valencia, Alicante y muchas más.</p>
+                </div>
+                <div class="feature-card">
+    <div class="feature-icon">🧠</div>
+    <h3>Búsqueda Inteligente</h3>
+    <p>La app aprende los patrones de disponibilidad y optimiza la búsqueda para encontrar tu cita más rápido.</p>
+</div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Velocidad Máxima</h3>
+                    <p>Búsqueda inteligente cada 45 segundos para no perder tu cita frente a otros solicitantes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- STEPS -->
+    <!-- ========================================== -->
+    <section class="steps" id="how">
+        <div class="steps-container">
+            <div class="section-label">CÓMO FUNCIONA</div>
+            <h2 class="section-title">4 pasos y listo</h2>
+            <p class="section-subtitle">Así de fácil es conseguir tu cita de extranjería</p>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>📋 Configura tus Datos</h3>
+                    <p>NIE, nombre, email, teléfono y provincia</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>🕐 Elige Horarios</h3>
+                    <p>Días y horas de búsqueda automática</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>🚀 Búsqueda 24/7</h3>
+                    <p>La app busca citas mientras tú descansas</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>🎉 ¡Cita Conseguida!</h3>
+                    <p>Notificación instantánea por WhatsApp</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIDEO -->
+    <!-- ========================================== -->
+    <section class="video-section" id="video">
+        <div class="container">
+            <div class="section-label">DEMO</div>
+            <h2 class="section-title">Mira cómo funciona</h2>
+            <p class="section-subtitle">Video demostrativo de la app en acción</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TESTIMONIALS -->
+    <!-- ========================================== -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-label">TESTIMONIOS</div>
+            <h2 class="section-title">Lo que dicen nuestros usuarios</h2>
+            <p class="section-subtitle">Miles de citas conseguidas con éxito</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐ ⭐ ⭐ ⭐ ⭐</div>
+                    <p>"Conseguí mi cita en 2 días. La app funcionó de madrugada mientras dormía. ¡Increíble!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info"><h4>María G.</h4><span>Madrid</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐ ⭐ ⭐ ⭐ ⭐</div>
+                    <p>"Llevaba semanas intentándolo manualmente. Con la app fue automático y rápido. 100% recomendada."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">C</div>
+                        <div class="author-info"><h4>Carlos R.</h4><span>Barcelona</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐ ⭐ ⭐ ⭐ ⭐</div>
+                    <p>"La notificación de WhatsApp me despertó a las 3am. ¡Valió la pena! Cita conseguida en 1 día."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">A</div>
+                        <div class="author-info"><h4>Ana L.</h4><span>Valencia</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- DOWNLOAD -->
+    <!-- ========================================== -->
+    <section class="download" id="download">
+        <div class="container">
+            <h2>📥 Descarga la App Gratis</h2>
+            <p>Disponible para Android. ¡Empieza a buscar tu cita ahora!</p>
+            <div class="download-buttons">
+                <a href="#" class="btn-dl">📱 Google Play</a>
+                <a href="#" class="btn-dl btn-dl-outline">⬇ Descargar APK</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FAQ -->
+    <!-- ========================================== -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-label">FAQ</div>
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+            <div class="faq-container">
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <div class="faq-question">¿Es gratis la app? <span>▼</span></div>
+                    <div class="faq-answer">Sí, la app es completamente gratis. Todas las funcionalidades incluidas sin coste adicional.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <div class="faq-question">¿Es legal usar esta app? <span>▼</span></div>
+                    <div class="faq-answer">Sí, es una herramienta de automatización personal que te asiste en la búsqueda de citas.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <div class="faq-question">¿En qué provincias funciona? <span>▼</span></div>
+                    <div class="faq-answer">Madrid, Barcelona, Valencia, Alicante, Málaga, A Coruña, Toledo, Albacete y todas las demás.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <div class="faq-question">¿Cómo recibo la confirmación? <span>▼</span></div>
+                    <div class="faq-answer">Recibirás la confirmación por WhatsApp, email y una alerta sonora en la app.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FOOTER -->
+    <!-- ========================================== -->
+    <footer>
+        <div class="container">
+            <p>© 2026 <a href="#">Asistente Cita Previa Extranjería</a>. Todos los derechos reservados.</p>
+            <p style="margin-top: 8px; font-size: 12px;">⚠️ App independiente - No estamos afiliados a entidades gubernamentales</p>
+        </div>
+    </footer>
+
+</body>
+</html>

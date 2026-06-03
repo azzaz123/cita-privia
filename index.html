@@ -103,9 +103,29 @@
         .step-card p { font-size: 13px; color: #64748b; }
 
         /* ========== VIDEO ========== */
-        .video-section { padding: 100px 24px; background: #fff; }
-        .video-container { max-width: 800px; margin: 60px auto 0; position: relative; padding-bottom: 56.25%; height: 0; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.1); }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .video-section {
+    padding: 100px 24px;
+    background: #fff;
+}
+
+.video-container {
+    max-width: 560px;  /* 👈 Reducido de 800px a 560px (más pequeño) */
+    margin: 60px auto 0;
+    position: relative;
+    padding-bottom: 56.25%; /* Mantiene proporción 16:9 */
+    height: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.1);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
         /* ========== TESTIMONIALS ========== */
         .testimonials { padding: 100px 24px; background: #f8fafc; }
